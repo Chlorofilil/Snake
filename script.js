@@ -3,10 +3,11 @@ document.addEventListener("keydown", keyPush);
 
 // canvas
 const canvas = document.querySelector("canvas");
-const title = document.querySelector("h1");
+const title = document.querySelector(".Total-score");
+const Ntitle = document.querySelector(".Total-Nscore");
 const ctx = canvas.getContext("2d");
 
-// game
+// Game size and speed
 let gameIsRunning = true;
 
 const fps = 15;
@@ -15,8 +16,10 @@ const tileCountX = canvas.width / tileSize;
 const tileCountY = canvas.height / tileSize;
 
 let score = 0;
+let startofNFood = 1;
+let Nscore = 0;
 
-// player
+// Player
 let snakeSpeed = tileSize;
 let snakePosX = 0;
 let snakePosY = canvas.height / 2;
@@ -27,7 +30,7 @@ let velocityY = 0;
 let tail = [];
 let snakeLength = 4;
 
-// food
+// Possitive Food
 let foodPosX = 0;
 let foodPosY = 0;
 
@@ -68,7 +71,7 @@ function moveStuff() {
         title.textContent = ++score;
         snakeLength++;
         resetFood();
-    }
+    }    
 }
 
 //Drawing board
@@ -80,7 +83,7 @@ function drawStuff() {
     drawGrid();
 
     // food
-    rectangle("#00bfff", foodPosX, foodPosY, tileSize, tileSize);
+    rectangle("#db0000", foodPosX, foodPosY, tileSize, tileSize);
 
     // tail
     tail.forEach((snakePart) =>
@@ -97,19 +100,23 @@ function rectangle(color, x, y, width, height) {
     ctx.fillRect(x, y, width, height);
 }
 
+// Random Pos. of food
+function randomFood(){
+    foodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
+    foodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
+}
+
 // Random food position
 function resetFood() {
+    randomFood();
     // Full map = gameOver
     if (snakeLength === tileCountX * tileCountY) {
         gameOver();
     }
 
-    foodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
-    foodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
-
-    // Food cant be spawn on snake head
+    // Normal food cant spawn on NFood
     if (foodPosX === snakePosX && foodPosY === snakePosY) {
-        resetFood();
+        randomFood();
     }
 
     // Food cant be spawn on snake tail
@@ -118,7 +125,7 @@ function resetFood() {
             (snakePart) => snakePart.x === foodPosX && snakePart.y === foodPosY
         )
     ) {
-        resetFood();
+        randomFood();
     }
 }
 

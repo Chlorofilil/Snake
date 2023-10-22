@@ -1,10 +1,11 @@
 body {
-    background: #ffbf00;
+    background: rgb(227,9,13);
+background: linear-gradient(90deg, rgba(227,9,13,1) 0%, rgba(46,46,172,1) 48%, rgba(20,143,168,1) 100%);
     text-align: center;
 }
 
 canvas {
-    border: 10px solid #f7347a;
+    border: 10px solid black;
 }
 
 h1 {
