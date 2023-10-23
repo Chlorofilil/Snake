@@ -16,8 +16,10 @@ const tileCountX = canvas.width / tileSize;
 const tileCountY = canvas.height / tileSize;
 
 let score = 0;
+let fakeScore = [1];
 let startofNFood = 1;
 let Nscore = 0;
+let nfood = null;
 
 // Player
 let snakeSpeed = tileSize;
@@ -33,6 +35,12 @@ let snakeLength = 4;
 // Possitive Food
 let foodPosX = 0;
 let foodPosY = 0;
+
+// NFood
+let NfoodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
+let NfoodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
+let NfoodInGame = false;
+
 
 //Main movmed function
 function moveStuff() {
@@ -70,12 +78,28 @@ function moveStuff() {
     if (snakePosX === foodPosX && snakePosY === foodPosY) {
         title.textContent = ++score;
         snakeLength++;
+        let newTimeForNFood = fakeScore[fakeScore.length - 1] + Math.floor(Math.random() * (7 - 5 + 1)) + 5;
+        fakeScore.push(newTimeForNFood);
+        console.log(fakeScore);
         resetFood();
-    }    
+        return fakeScore;
+    }     
+     
+    // NFood collision = decrease length
+    if (snakePosX === NfoodPosX && snakePosY === NfoodPosY && NfoodInGame === true) {
+        Ntitle.textContent = ++Nscore;
+        if(snakeLength >= 5) {
+            snakeLength--;
+        }                
+        return NfoodInGame = false;  
+    } 
+
 }
+
 
 //Drawing board
 function drawStuff() {
+    
     // background
     rectangle("#ffbf00", 0, 0, canvas.width, canvas.height);
 
@@ -92,6 +116,33 @@ function drawStuff() {
 
     // snake
     rectangle("black", snakePosX, snakePosY, tileSize, tileSize);
+    
+    // Spawn of NFood
+    fakeScore.forEach(function(Num){
+        if(score === Num){
+            NfoodInGame = true;
+        }
+    })
+    // Drawing NFood
+    if(NfoodInGame === true){
+
+        // Draw NFood
+        rectangle("#01c742", NfoodPosX, NfoodPosY, tileSize, tileSize);
+
+        // NFood cant spawn on NFood
+        if (foodPosX === snakePosX && foodPosY === snakePosY) {
+            randomNFood();
+        }
+
+        // NFood cant be spawn on snake tail
+        if (
+            tail.some(
+                (snakePart) => snakePart.x === foodPosX && snakePart.y === foodPosY
+            )
+        ) {
+            randomNFood();
+        }        
+    }
 }
 
 // draw rectangle
@@ -100,23 +151,20 @@ function rectangle(color, x, y, width, height) {
     ctx.fillRect(x, y, width, height);
 }
 
-// Random Pos. of food
-function randomFood(){
-    foodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
-    foodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
-}
-
 // Random food position
 function resetFood() {
-    randomFood();
+    
     // Full map = gameOver
     if (snakeLength === tileCountX * tileCountY) {
         gameOver();
     }
 
+    foodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
+    foodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
+
     // Normal food cant spawn on NFood
     if (foodPosX === snakePosX && foodPosY === snakePosY) {
-        randomFood();
+        resetFood();
     }
 
     // Food cant be spawn on snake tail
@@ -125,7 +173,12 @@ function resetFood() {
             (snakePart) => snakePart.x === foodPosX && snakePart.y === foodPosY
         )
     ) {
-        randomFood();
+        resetFood();
+    }
+
+    // Food cant spawn on Nfood
+    if (foodPosX === NfoodPosX && foodPosY === NfoodPosY) {
+        resetFood();
     }
 }
 
@@ -183,3 +236,21 @@ function drawGrid() {
         }
     }
 }
+
+function randomNFood(){
+    NfoodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
+    NfoodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
+}
+
+// function firstNFood(){
+//     if(score >= startofNFood){
+//         NfoodInGame = true;
+//         rectangle("#01c742", NfoodPosX, NfoodPosY, tileSize, tileSize);
+//     }
+// }
+// function otherNFood(){
+//     if(score === fakeScore){
+//         NfoodInGame = true;
+//         rectangle("#01c742", NfoodPosX, NfoodPosY, tileSize, tileSize);
+//     }
+// }
