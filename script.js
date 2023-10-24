@@ -40,6 +40,8 @@ let foodPosY = 0;
 let NfoodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
 let NfoodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
 let NfoodInGame = false;
+let rovnostScore = false;
+let pouziteNum = [];
 
 
 //Main movmed function
@@ -80,23 +82,25 @@ function moveStuff() {
         snakeLength++;
         let newTimeForNFood = fakeScore[fakeScore.length - 1] + Math.floor(Math.random() * (7 - 5 + 1)) + 5;
         fakeScore.push(newTimeForNFood);
-        console.log(fakeScore);
+        
         resetFood();
         return fakeScore;
     }     
-     
+    console.log(fakeScore);
+
     // NFood collision = decrease length
-    if (snakePosX === NfoodPosX && snakePosY === NfoodPosY && NfoodInGame === true) {
+    if (snakePosX === NfoodPosX && snakePosY === NfoodPosY  && NfoodInGame === true) {
         Ntitle.textContent = ++Nscore;
         if(snakeLength >= 5) {
             snakeLength--;
         }                
-        return NfoodInGame = false;  
+        NfoodInGame = false;
+        rovnostScore = false;
+        // randomNFoodminus();   
+             
     } 
-
 }
-
-
+console.log(rovnostScore)
 //Drawing board
 function drawStuff() {
     
@@ -119,10 +123,13 @@ function drawStuff() {
     
     // Spawn of NFood
     fakeScore.forEach(function(Num){
-        if(score === Num){
+        if(score === Num && !rovnostScore && pouziteNum.indexOf(Num) === -1){             
             NfoodInGame = true;
-        }
+            rovnostScore = true;
+            pouziteNum.push(Num);
+        }             
     })
+  
     // Drawing NFood
     if(NfoodInGame === true){
 
@@ -240,6 +247,14 @@ function drawGrid() {
 function randomNFood(){
     NfoodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
     NfoodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
+}
+
+function randomNFoodminus(){
+    NfoodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
+    NfoodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
+    NfoodPosX = -NfoodPosX;
+    NfoodPosY = -NfoodPosY;
+    
 }
 
 // function firstNFood(){
