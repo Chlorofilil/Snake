@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Choose_PlayGround</title>
+</head>
+<body>
+    <header>        
+        <h1 class="MENU-H1">SRPENT PLAYGROUND</h1>
+    </header>
+    <main>
+        <form class="playerName">
+            <div class="nameinput">
+                <h2>Say your name, deer srpent.</h2>                
+                <input type="text" class="sayYourName" maxlength="6" name="firstName" placeholder="Name">               
+            </div>
+
+            <div id="ChooseYourMap">
+                <h2>Where do you want to play ? </h2>
+                <label for="Choose-map" class="choose-pic_1"></label>
+                <input type="checkbox" id="Choose-map" class="checkbox">
+            </div>
+            
+            <div id="ChooseYourTool">
+                <h2>Choose your tools wisely, young serpent.</h2>
+                <label for="ChooseWallblock" class="DescriptionOfTool BlockWallTool" >Blockwall. It will lock you in a cage with no way to escape for short time.</label>
+                <input type="checkbox" id="ChooseWallblock" class="toolcheck">
+                <label for="ChooseNFood" class="DescriptionOfTool NFoodTool">Negative food. You will eat a lot young serpet. But this food will make your body slim.</label>
+                <input type="checkbox" id="ChooseNFood" class="toolcheck">
+            </div>
+
+            <a href="index.html">
+                <button id="Begin" class="enter-game">Lets begin !</button>
+            </a>            
+    </form>
+
+        <a href="mainmenu.html">
+            <button id="Return-menu">Return</button>
+        </a>
+        
+    </main>
+
+    <script src="uuidv4.js"></script>
+    <script type="module" src="Choose_map.js"></script>
+</body>
+</html>

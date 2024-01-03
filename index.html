@@ -4,16 +4,23 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="style.css">
-		<title>my absolute snake son</title>
+		<title>Srpent</title>
 	</head>
 
 	<body>
-		<canvas width="600" height="600"></canvas>
+		<canvas id="mainCanvas" class="Game" width="600" height="600"></canvas>
+		<div id="TimerFor_Blockwall"></div>
 		<h1 class="Total-score">SCORE</h1>
 		<h1 class="Total-Nscore">NEGATIVE FOOD</h1>
-
+		<a href="mainmenu.html">
+			<button class="back-spat">Back</button>
+		</a>
+		
+		<script src="DrawingStuff.js"></script>	
+		<script src="Choose_map.js"></script>		
+        <script src="blockWall.js"></script>
+		<script src="pauseGame.js"></script>
 		<script src="script.js"></script>
-        <script src="Negativefood.js"></script>
         <script src="Game_Loop.js"></script>
 	</body>
 </html>

@@ -1,23 +1,471 @@
 body {
-    background: rgb(227,9,13);
-background: linear-gradient(90deg, rgba(227,9,13,1) 0%, rgba(46,46,172,1) 48%, rgba(20,143,168,1) 100%);
-    text-align: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-canvas {
+@font-face {
+  font-family: 'FontGame';
+  src: url(Luminari-Regular.ttf);
+}
+
+
+                
+
+body {
+  background: #005792; 
+  text-align: center;
+  font-family: 'FontGame';
+}
+
+#mainCanvas {
+    position: fixed;
     border: 10px solid black;
+    left: 50%;
+    top: 43.5%;
+    transform: translate(-50%, -50%);    
 }
 
-h1 {
-    margin-top: 0;
+.Game {
+    border: 10px solid black;
+    animation: borderAnimation 2.5s linear infinite;
+  }
+  
+  @keyframes borderAnimation {
+    0%, 100% {
+      border-color: black;
+      border-width: 10px;
+    }    
+    50% {
+      border-color: #fdb44b; 
+      border-width: 20px
+    }
+  }
+
+
+.Total-score{
+    position: fixed;
+    margin: 0;
+    left: 50%;
+    top: 82.5%;
+    transform: translate(-50%, -50%); 
+}
+
+.Total-Nscore{
+    position: fixed;
+    margin: 0;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%); 
+}
+
+#TimerFor_Blockwall {
+    position: fixed;
+    width: 100px;
+    height: 50px;
+    left: 50%;
+    top: 2.5%;
+    transform: translate(-50%, -50%);
     font-size: 4em;
-    font-family: "Avenir Next", Verdana;
+    font-family: 'FontGame';
     font-weight: bold;
-    letter-spacing: -10px;
 }
 
-h1 strong {
-    font-size: 1.35em;
-    display: inline-block;
-    margin: 0 0.25em;
+#start {
+  position: fixed;
+  left: 20%;
+  top: 25%;
+  font-size: 40px;
+  padding: 2px 7px;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  background: #fdb44b; 
+  border: 2px solid black;
+}
+
+#start:hover {
+  background: #00bbf0; 
+}
+
+
+
+/*************************************************************************************************** 
+                                CSS FOR DESIGN OF PAGE
+*************************************************************************************************** */
+/* Top of the webpage */
+header {
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  background-color: #fdb44b;
+  border-bottom: 2px solid black;
+}
+
+header h1{
+  font-size: 50px;  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 auto;
+  transform: translate(-50%, -50%);
+}
+
+/*************************************************************************************************** 
+                                CSS FOR MAIN MANU
+*************************************************************************************************** */
+
+#choose-game {
+  position: fixed;
+  left: 50%;
+  top: 25%;
+  font-size: 40px;
+  padding: 2px 7px;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  background: #fdb44b; 
+  border: 2px solid black;
+  font-family: 'FontGame';
+}
+
+#choose-game:hover{
+  background: #00bbf0; 
+  box-shadow: 5px 5px 8px black;
+}
+
+#manual {
+  position: fixed;
+  left: 50%;
+  top: 40%;
+  font-size: 40px;
+  padding: 2px 7px;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  background: #fdb44b; 
+  border: 2px solid black;
+  font-family: 'FontGame';
+}
+
+#manual:hover {
+  background: #00bbf0; 
+  box-shadow: 5px 5px 8px black;
+}
+
+#Top10 {
+  position: fixed;
+  left: 50%;
+  top: 55%;
+  font-size: 40px;
+  padding: 2px 7px;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  background: #fdb44b; 
+  border: 2px solid black;
+  font-family: 'FontGame';
+}
+
+#Top10:hover {
+  background: #00bbf0; 
+  box-shadow: 5px 5px 8px black;
+}
+
+/*************************************************************************************************** 
+                                CSS FOR CHOOSE YOUR PLAYGRAIND  
+*************************************************************************************************** */
+
+/*******  button for Choose_playground  *******/
+#Return-menu{
+  position: fixed;
+  left: 40%;
+  bottom: 3%;
+  font-size: 40px;
+  padding: 2px 7px;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  background: #fdb44b; 
+  border: 2px solid black;
+  font-family: 'FontGame';
+}
+
+#Return-menu:hover {
+  background: #00bbf0;
+  box-shadow: 5px 5px 8px black;
+}
+
+#Begin {
+  position: fixed;
+  left: 60%;
+  bottom: 3%;
+  font-size: 40px;
+  padding: 2px 7px;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  background: #fdb44b; 
+  border: 2px solid black;
+  font-family: 'FontGame';
+}
+
+#Begin:hover {
+  background: #00bbf0;
+  box-shadow: 5px 5px 8px black;
+}
+
+.back-mainmenu{
+  position: fixed;
+  right: 0;
+  bottom:  5px;
+  font-size: 40px;
+  padding: 2px 7px;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  background: #fdb44b; 
+  border: 2px solid black;
+  font-family: 'FontGame';
+}
+
+/*** Choose-playgraund_Checkbox-mapa ***/
+#ChooseYourMap{
+  position: absolute;
+  top: 41%;
+  left: 50%;
+  height: 275px;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox {
+  display: none;
+}
+
+.choose-pic_1 {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  width: 200px; 
+  height: 200px; 
+  display: inline-block;
+  transform: translate(-50%, 0%);
+  background-image: url('pics/Map_1.PNG');
+  background-size: cover; 
+  cursor: pointer;
+}
+
+h1{
+  position: absolute;
+  width: 1200px;
+  top: 10%;
+  margin: 0;
+  transform: translate(-50%, -0%); 
+  left: 50%;
+  font-size: 45px;
+  font-weight: bold;
+  color: #fdb44b;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
+}
+
+.MENU-H1{
+  color: black;
+}
+
+/*** Name input ***/
+h2{
+  font-size: 35px;
+  font-weight: bold;
+  margin: 0;
+  color: #fdb44b;
+  text-shadow: 5px 5px 8px rgba(0, 0, 0, 1);
+}
+
+.nameinput{
+  position: absolute;
+  width: 100%;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -0%);  
+  
+}
+
+.sayYourName{
+  background: #fdb44b; 
+  border: 2px solid black;
+  width: 7.5%;
+  height: 35px;
+  padding: 5px 10px;
+  border-radius: 25px;
+  font-family: 'FontGame';
+  font-size: 25px;
+  text-align: center;
+  
+}
+
+.sayYourName:focus {
+  outline: none;
+}
+
+/*** Choose if you want to play with tools ***/
+#ChooseYourTool{
+  position: absolute;
+  top: 77%;
+  left: 50%;
+  height: 300px;
+  transform: translate(-50%, -50%);
+}
+
+.toolcheck {
+  display: none;
+}
+
+.DescriptionOfTool{
+  display:inline-block;
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+
+.back-spat{
+  position: fixed;
+  left: 15%;
+  bottom: 50%;
+  font-size: 40px;
+  padding: 2px 7px;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  background: #fdb44b; 
+  border: 2px solid black;
+  font-family: 'FontGame';
+}
+
+.warnigForMap {
+  position: absolute;
+  font-size: 20px;
+  top: 58%;
+  left: 50%;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  color: #fdb44b;
+  margin: 0;
+  height: 20px;
+}
+
+/* Error name check */
+.error-message-namecheck {
+  position: absolute;
+  font-size: 20px;
+  top: 24%;
+  left: 50%;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  color: #fdb44b;
+  margin: 0;
+  height: 20px;
+}
+
+/*************************************************************************************************** 
+                                CSS FOR TOP10 SERPENTS WEB  
+*************************************************************************************************** */
+#table-top10{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fdb44b;
+  text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 1);
+  font-size: 30px;
+}
+
+#table-top10 th{
+  padding: 15px;
+}
+
+#Return-menu-top10{
+  position: fixed;
+  left: 50%;
+  bottom: 3%;
+  font-size: 40px;
+  padding: 2px 7px;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  background: #fdb44b; 
+  border: 2px solid black;
+  font-family: 'FontGame';
+}
+
+#Return-menu-top10:hover {
+  background: #00bbf0;
+  box-shadow: 5px 5px 8px black;
+}
+
+
+/*************************************************************************************************** 
+                                CSS FOR TOP10 SERPENTS WEB  
+*************************************************************************************************** */
+
+#blocWall_description{
+  position: absolute;
+  width: 1200px;
+  height: 310px;
+  font-size: 25px;
+  top: 32.5%;
+  left: 50%;
+  transform: translate(-50%, -0%);
+}
+
+#blocWall_description p{  
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+#blocWall_description #ManualCanvas {
+  position: absolute;
+  transform: translate(-50%, 50%);
+  bottom: 25%;
+}
+
+.canvasManual{
+  width: 100px;
+  height: 100px;
+}
+
+#NegativeFood_description{
+  position: absolute;
+  width: 1200px;
+  height: 200px;
+  font-size: 25px;
+  top: 77.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#Pause_event{
+  position: absolute;
+  width: 1200px;
+  font-size: 25px;
+  top: 97%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -1,19 +1,8 @@
 // listeners
 document.addEventListener("keydown", keyPush);
 
-// canvas
-const canvas = document.querySelector("canvas");
-const title = document.querySelector(".Total-score");
-const Ntitle = document.querySelector(".Total-Nscore");
-const ctx = canvas.getContext("2d");
-
 // Game size and speed
 let gameIsRunning = true;
-
-const fps = 15;
-const tileSize = 50;
-const tileCountX = canvas.width / tileSize;
-const tileCountY = canvas.height / tileSize;
 
 let score = 0;
 let fakeScore = [1];
@@ -42,6 +31,15 @@ let NfoodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
 let NfoodInGame = false;
 let rovnostScore = false;
 let pouziteNum = [];
+let kockaVytvorena = false;
+let bugFix = false;
+
+// BlockWall
+let blockWallStatus = false;
+let running = false;
+let isBlinking = false;
+
+let playerName;
 
 
 //Main movmed function
@@ -49,20 +47,37 @@ function moveStuff() {
     snakePosX += snakeSpeed * velocityX;
     snakePosY += snakeSpeed * velocityY;
 
-    // Going true walls
-    if (snakePosX > canvas.width - tileSize) {
-        snakePosX = 0;
-    }
-    if (snakePosX < 0) {
-        snakePosX = canvas.width;
-    }
-    if (snakePosY > canvas.height - tileSize) {
-        snakePosY = 0;
-    }
-    if (snakePosY < 0) {
-        snakePosY = canvas.height;
+    // Block wall control
+    if(blockWallStatus === false){
+        // Going true walls
+        if (snakePosX > canvas.width - tileSize) {
+            snakePosX = 0;
+        }
+        if (snakePosX < 0) {
+            snakePosX = canvas.width;
+        }
+        if (snakePosY > canvas.height - tileSize) {
+            snakePosY = 0;
+        }
+        if (snakePosY < 0) {
+            snakePosY = canvas.height;
+        }
+    } else if(blockWallStatus === true){
+        if (snakePosX > canvas.width - tileSize) {
+            gameOver();
+        }
+        if (snakePosX < 0) {
+            gameOver();
+        }
+        if (snakePosY > canvas.height - tileSize) {
+            gameOver();
+        }
+        if (snakePosY < 0) {
+            gameOver();
+        }
     }
 
+    
     // Hitting tail = gameOver
     tail.forEach((snakePart) => {
         if (snakePosX === snakePart.x && snakePosY === snakePart.y) {
@@ -78,7 +93,7 @@ function moveStuff() {
 
     // food collision = increase length
     if (snakePosX === foodPosX && snakePosY === foodPosY) {
-        title.textContent = ++score;
+        title.textContent = `Total score : ${++score}`;
         snakeLength++;
         let newTimeForNFood = fakeScore[fakeScore.length - 1] + Math.floor(Math.random() * (7 - 5 + 1)) + 5;
         fakeScore.push(newTimeForNFood);
@@ -86,77 +101,78 @@ function moveStuff() {
         resetFood();
         return fakeScore;
     }     
-    console.log(fakeScore);
+    
 
     // NFood collision = decrease length
     if (snakePosX === NfoodPosX && snakePosY === NfoodPosY  && NfoodInGame === true) {
-        Ntitle.textContent = ++Nscore;
+        Ntitle.textContent = `Total score of N-Food: ${++Nscore}`;
         if(snakeLength >= 5) {
             snakeLength--;
-        }                
+        }   
         NfoodInGame = false;
-        rovnostScore = false;
-        // randomNFoodminus();   
-             
+        kockaVytvorena = false;
+        
+        
+                     
     } 
 }
-console.log(rovnostScore)
+
 //Drawing board
 function drawStuff() {
+
+    DrawingPlayGround();
     
-    // background
-    rectangle("#ffbf00", 0, 0, canvas.width, canvas.height);
+     // food
+     rectangle("#db0000", foodPosX, foodPosY, tileSize, tileSize);
 
-    // grid
-    drawGrid();
-
-    // food
-    rectangle("#db0000", foodPosX, foodPosY, tileSize, tileSize);
-
-    // tail
-    tail.forEach((snakePart) =>
-        rectangle("#555", snakePart.x, snakePart.y, tileSize, tileSize)
-    );
-
-    // snake
-    rectangle("black", snakePosX, snakePosY, tileSize, tileSize);
-    
+     // tail
+     tail.forEach((snakePart) =>
+         rectangle("#555", snakePart.x, snakePart.y, tileSize, tileSize)
+     );
+ 
+     // snake
+     rectangle("black", snakePosX, snakePosY, tileSize, tileSize);
+        
     // Spawn of NFood
     fakeScore.forEach(function(Num){
-        if(score === Num && !rovnostScore && pouziteNum.indexOf(Num) === -1){             
-            NfoodInGame = true;
-            rovnostScore = true;
+        
+        if(score === Num  && pouziteNum.indexOf(Num) === -1 && !kockaVytvorena ){  
+            
+            NfoodInGame = true;               
+            kockaVytvorena = true;         
             pouziteNum.push(Num);
-        }             
+        }                  
     })
-  
+    
     // Drawing NFood
-    if(NfoodInGame === true){
-
+    if(NfoodInGame === true ){
+        
         // Draw NFood
         rectangle("#01c742", NfoodPosX, NfoodPosY, tileSize, tileSize);
 
         // NFood cant spawn on NFood
-        if (foodPosX === snakePosX && foodPosY === snakePosY) {
+        if (NfoodPosX === snakePosX && NfoodPosY === snakePosY) {
             randomNFood();
         }
 
         // NFood cant be spawn on snake tail
         if (
             tail.some(
-                (snakePart) => snakePart.x === foodPosX && snakePart.y === foodPosY
+                (snakePart) => snakePart.x === NfoodPosX && snakePart.y === NfoodPosY
             )
         ) {
-            randomNFood();
-        }        
+            randomNFood();        
+        }               
     }
+
+    // Canvas blinking in blockWall = true
+    if(isPaused){
+
+    }
+    canvasBlinking(blockWallStatus);
 }
 
-// draw rectangle
-function rectangle(color, x, y, width, height) {
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y, width, height);
-}
+
 
 // Random food position
 function resetFood() {
@@ -193,6 +209,22 @@ function resetFood() {
 function gameOver() {
     title.innerHTML = `☠️ <strong> ${score} </strong> ☠️`;
     gameIsRunning = false;
+
+    if(gameIsRunning === false){
+        let myPlayers = JSON.parse(localStorage.getItem("Player"))
+        //PlayerID
+        const nameIDofPlayer = location.hash.substring(1)
+        // Looking for player with same ID as webpage.
+        const playerIndex = myPlayers.findIndex(oneObject => oneObject.id === nameIDofPlayer);
+
+        // Checking if playerIndex is empty, if not (-1)then function will run.
+        if (playerIndex !== -1) {
+            if(myPlayers[playerIndex].playerScore < score){
+                myPlayers[playerIndex].playerScore = score;
+            localStorage.setItem("Player", JSON.stringify(myPlayers));
+            }            
+        }        
+    }
 }
 
 //Snake control
@@ -229,20 +261,7 @@ function keyPush(event) {
     }
 }
 
-// Map grid
-function drawGrid() {
-    for (let i = 0; i < tileCountX; i++) {
-        for (let j = 0; j < tileCountY; j++) {
-            rectangle(
-                "#fff",
-                tileSize * i,
-                tileSize * j,
-                tileSize - 1,
-                tileSize - 1
-            );
-        }
-    }
-}
+
 
 function randomNFood(){
     NfoodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
@@ -257,15 +276,7 @@ function randomNFoodminus(){
     
 }
 
-// function firstNFood(){
-//     if(score >= startofNFood){
-//         NfoodInGame = true;
-//         rectangle("#01c742", NfoodPosX, NfoodPosY, tileSize, tileSize);
-//     }
-// }
-// function otherNFood(){
-//     if(score === fakeScore){
-//         NfoodInGame = true;
-//         rectangle("#01c742", NfoodPosX, NfoodPosY, tileSize, tileSize);
-//     }
-// }
+// Button on click back
+let backToMainMenu = document.querySelector(".back-spat").addEventListener("click", function(){
+
+})
