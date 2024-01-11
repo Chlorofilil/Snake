@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Header.css">
     <title>Choose_PlayGround</title>
 </head>
 <body>
-    <header>        
+    <header>       
         <h1 class="MENU-H1">SRPENT PLAYGROUND</h1>
     </header>
     <main>
-        <form class="playerName">
+        <form>
+            <!--PLACE FOR PLAYER NAME-->
             <div class="nameinput">
                 <h2>Say your name, deer srpent.</h2>                
                 <input type="text" class="sayYourName" maxlength="6" name="firstName" placeholder="Name">               
             </div>
 
+            <!--PLAYER WILL CHOOSE FROM MAP/S-->
             <div id="ChooseYourMap">
                 <h2>Where do you want to play ? </h2>
                 <label for="Choose-map" class="choose-pic_1"></label>
                 <input type="checkbox" id="Choose-map" class="checkbox">
             </div>
             
+            <!--PLAYER CAN CHOOSE IF WHAT FEATURE HE WANT TO USE IN GAME, ALSO HE DONT NEED TO PLAY WITH ANY OF THIS-->
             <div id="ChooseYourTool">
                 <h2>Choose your tools wisely, young serpent.</h2>
                 <label for="ChooseWallblock" class="DescriptionOfTool BlockWallTool" >Blockwall. It will lock you in a cage with no way to escape for short time.</label>
@@ -31,13 +35,15 @@
                 <input type="checkbox" id="ChooseNFood" class="toolcheck">
             </div>
 
+            <!--BTN TO GAME-->
             <a href="index.html">
-                <button id="Begin" class="enter-game">Lets begin !</button>
+                <button id="Begin" class="enter-game BTN">Lets begin !</button>
             </a>            
     </form>
 
+        <!--BTN TO MAIN MANU-->
         <a href="mainmenu.html">
-            <button id="Return-menu">Return</button>
+            <button id="Return-menu" class="BTN">Return</button>
         </a>
         
     </main>

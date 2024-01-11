@@ -1,16 +1,14 @@
+/*BASIC RESET OF CSS*/
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+/*SETING FONT FOR GAME*/
 @font-face {
   font-family: 'FontGame';
   src: url(Luminari-Regular.ttf);
-}
-
-
-                
+}                
 
 body {
   background: #005792; 
@@ -26,6 +24,7 @@ body {
     transform: translate(-50%, -50%);    
 }
 
+/*CREATING ANIMATION OF CANVAS BORDER FOR BLCOKWALL*/
 .Game {
     border: 10px solid black;
     animation: borderAnimation 2.5s linear infinite;
@@ -42,21 +41,20 @@ body {
     }
   }
 
+.score-css {
+  position: fixed;
+  margin: 0;
+  transform: translate(-50%, -50%); 
+}
 
 .Total-score{
-    position: fixed;
-    margin: 0;
     left: 50%;
-    top: 82.5%;
-    transform: translate(-50%, -50%); 
+    top: 82.5%;    
 }
 
 .Total-Nscore{
-    position: fixed;
-    margin: 0;
     left: 50%;
     top: 90%;
-    transform: translate(-50%, -50%); 
 }
 
 #TimerFor_Blockwall {
@@ -71,7 +69,7 @@ body {
     font-weight: bold;
 }
 
-#start {
+/* #start {
   position: fixed;
   left: 20%;
   top: 25%;
@@ -88,39 +86,14 @@ body {
 
 #start:hover {
   background: #00bbf0; 
-}
-
-
-
-/*************************************************************************************************** 
-                                CSS FOR DESIGN OF PAGE
-*************************************************************************************************** */
-/* Top of the webpage */
-header {
-  position: absolute;
-  width: 100%;
-  height: 10%;
-  background-color: #fdb44b;
-  border-bottom: 2px solid black;
-}
-
-header h1{
-  font-size: 50px;  
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: 0 auto;
-  transform: translate(-50%, -50%);
-}
+} */
 
 /*************************************************************************************************** 
                                 CSS FOR MAIN MANU
 *************************************************************************************************** */
-
-#choose-game {
+/* BTN */
+.BTN {
   position: fixed;
-  left: 50%;
-  top: 25%;
   font-size: 40px;
   padding: 2px 7px;
   transform: translate(-50%, -50%);
@@ -133,51 +106,24 @@ header h1{
   font-family: 'FontGame';
 }
 
-#choose-game:hover{
+.BTN:hover{
   background: #00bbf0; 
   box-shadow: 5px 5px 8px black;
+}
+/* POSITION */
+#choose-game {  
+  left: 50%;
+  top: 25%;  
 }
 
 #manual {
-  position: fixed;
   left: 50%;
   top: 40%;
-  font-size: 40px;
-  padding: 2px 7px;
-  transform: translate(-50%, -50%);
-  letter-spacing: 1px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: black;
-  background: #fdb44b; 
-  border: 2px solid black;
-  font-family: 'FontGame';
-}
-
-#manual:hover {
-  background: #00bbf0; 
-  box-shadow: 5px 5px 8px black;
 }
 
 #Top10 {
-  position: fixed;
   left: 50%;
   top: 55%;
-  font-size: 40px;
-  padding: 2px 7px;
-  transform: translate(-50%, -50%);
-  letter-spacing: 1px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: black;
-  background: #fdb44b; 
-  border: 2px solid black;
-  font-family: 'FontGame';
-}
-
-#Top10:hover {
-  background: #00bbf0; 
-  box-shadow: 5px 5px 8px black;
 }
 
 /*************************************************************************************************** 
@@ -186,61 +132,18 @@ header h1{
 
 /*******  button for Choose_playground  *******/
 #Return-menu{
-  position: fixed;
   left: 40%;
   bottom: 3%;
-  font-size: 40px;
-  padding: 2px 7px;
-  transform: translate(-50%, -50%);
-  letter-spacing: 1px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: black;
-  background: #fdb44b; 
-  border: 2px solid black;
-  font-family: 'FontGame';
-}
-
-#Return-menu:hover {
-  background: #00bbf0;
-  box-shadow: 5px 5px 8px black;
 }
 
 #Begin {
-  position: fixed;
   left: 60%;
   bottom: 3%;
-  font-size: 40px;
-  padding: 2px 7px;
-  transform: translate(-50%, -50%);
-  letter-spacing: 1px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: black;
-  background: #fdb44b; 
-  border: 2px solid black;
-  font-family: 'FontGame';
-}
-
-#Begin:hover {
-  background: #00bbf0;
-  box-shadow: 5px 5px 8px black;
 }
 
 .back-mainmenu{
-  position: fixed;
   right: 0;
   bottom:  5px;
-  font-size: 40px;
-  padding: 2px 7px;
-  transform: translate(-50%, -50%);
-  letter-spacing: 1px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: black;
-  background: #fdb44b; 
-  border: 2px solid black;
-  font-family: 'FontGame';
 }
 
 /*** Choose-playgraund_Checkbox-mapa ***/
@@ -282,10 +185,6 @@ h1{
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
 }
 
-.MENU-H1{
-  color: black;
-}
-
 /*** Name input ***/
 h2{
   font-size: 35px;
@@ -300,8 +199,7 @@ h2{
   width: 100%;
   top: 10%;
   left: 50%;
-  transform: translate(-50%, -0%);  
-  
+  transform: translate(-50%, -0%);    
 }
 
 .sayYourName{
@@ -313,8 +211,7 @@ h2{
   border-radius: 25px;
   font-family: 'FontGame';
   font-size: 25px;
-  text-align: center;
-  
+  text-align: center;  
 }
 
 .sayYourName:focus {
@@ -340,46 +237,31 @@ h2{
   margin: 10px 0;
 }
 
-
 .back-spat{
-  position: fixed;
   left: 15%;
   bottom: 50%;
-  font-size: 40px;
-  padding: 2px 7px;
-  transform: translate(-50%, -50%);
-  letter-spacing: 1px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: black;
-  background: #fdb44b; 
-  border: 2px solid black;
-  font-family: 'FontGame';
 }
 
-.warnigForMap {
+/* Basic for choose error tools */
+.warningPos{
   position: absolute;
   font-size: 20px;
-  top: 58%;
-  left: 50%;
   height: 300px;
   transform: translate(-50%, -50%);
   color: #fdb44b;
   margin: 0;
   height: 20px;
+}
+/* Tool was not choosen */
+.warnigForMap {
+  top: 58%;
+  left: 50%;
 }
 
 /* Error name check */
 .error-message-namecheck {
-  position: absolute;
-  font-size: 20px;
   top: 24%;
   left: 50%;
-  height: 300px;
-  transform: translate(-50%, -50%);
-  color: #fdb44b;
-  margin: 0;
-  height: 20px;
 }
 
 /*************************************************************************************************** 
@@ -400,39 +282,35 @@ h2{
 }
 
 #Return-menu-top10{
-  position: fixed;
   left: 50%;
   bottom: 3%;
-  font-size: 40px;
-  padding: 2px 7px;
-  transform: translate(-50%, -50%);
-  letter-spacing: 1px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: black;
-  background: #fdb44b; 
-  border: 2px solid black;
-  font-family: 'FontGame';
 }
-
-#Return-menu-top10:hover {
-  background: #00bbf0;
-  box-shadow: 5px 5px 8px black;
-}
-
 
 /*************************************************************************************************** 
-                                CSS FOR TOP10 SERPENTS WEB  
+                                CSS FOR MANUAL
 *************************************************************************************************** */
-
-#blocWall_description{
+.descriptionText{
   position: absolute;
   width: 1200px;
-  height: 310px;
   font-size: 25px;
-  top: 32.5%;
   left: 50%;
+}
+
+#blocWall_description{  
+  height: 310px;  
+  top: 32.5%;
   transform: translate(-50%, -0%);
+}
+
+#NegativeFood_description{
+  height: 200px;
+  top: 77.5%;
+  transform: translate(-50%, -50%);
+}
+
+#Pause_event{  
+  top: 97%;  
+  transform: translate(-50%, -50%);
 }
 
 #blocWall_description p{  
@@ -449,23 +327,4 @@ h2{
 .canvasManual{
   width: 100px;
   height: 100px;
-}
-
-#NegativeFood_description{
-  position: absolute;
-  width: 1200px;
-  height: 200px;
-  font-size: 25px;
-  top: 77.5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#Pause_event{
-  position: absolute;
-  width: 1200px;
-  font-size: 25px;
-  top: 97%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

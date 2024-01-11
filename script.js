@@ -3,7 +3,6 @@ document.addEventListener("keydown", keyPush);
 
 // Game size and speed
 let gameIsRunning = true;
-
 let score = 0;
 let fakeScore = [1];
 let startofNFood = 1;
@@ -31,7 +30,6 @@ let NfoodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
 let NfoodInGame = false;
 let rovnostScore = false;
 let pouziteNum = [];
-let kockaVytvorena = false;
 let bugFix = false;
 
 // BlockWall
@@ -41,57 +39,77 @@ let isBlinking = false;
 
 let playerName;
 
+//LS inport
+let nFoodCheck = localStorage.getItem("NFoodCheck");
+let nFoodCheckValue = JSON.parse(nFoodCheck);
+
+//Going true walls
+function runtruewalls(){
+    if (snakePosX > canvas.width - tileSize) {
+        snakePosX = 0;
+    }
+    if (snakePosX < 0) {
+        snakePosX = canvas.width;
+    }
+    if (snakePosY > canvas.height - tileSize) {
+        snakePosY = 0;
+    }
+    if (snakePosY < 0) {
+        snakePosY = canvas.height;
+    }
+}
+
+//BlockWall colision
+function hitwalls(){
+    if (snakePosX > canvas.width - tileSize) {
+        gameOver();
+    }
+    if (snakePosX < 0) {
+        gameOver();
+    }
+    if (snakePosY > canvas.height - tileSize) {
+        gameOver();
+    }
+    if (snakePosY < 0) {
+        gameOver();
+    }
+}
 
 //Main movmed function
 function moveStuff() {
     snakePosX += snakeSpeed * velocityX;
     snakePosY += snakeSpeed * velocityY;
 
-    // Block wall control
-    if(blockWallStatus === false){
-        // Going true walls
-        if (snakePosX > canvas.width - tileSize) {
-            snakePosX = 0;
-        }
-        if (snakePosX < 0) {
-            snakePosX = canvas.width;
-        }
-        if (snakePosY > canvas.height - tileSize) {
-            snakePosY = 0;
-        }
-        if (snakePosY < 0) {
-            snakePosY = canvas.height;
-        }
-    } else if(blockWallStatus === true){
-        if (snakePosX > canvas.width - tileSize) {
-            gameOver();
-        }
-        if (snakePosX < 0) {
-            gameOver();
-        }
-        if (snakePosY > canvas.height - tileSize) {
-            gameOver();
-        }
-        if (snakePosY < 0) {
-            gameOver();
+    //If player want to play with blockwall
+    if(blockWallCheckValue === 1){            
+        if(blockWallStatus === false){     
+            //normalPlay       
+            runtruewalls();
+        } else if(blockWallStatus && blockWallCheck){
+            //BlockWall On-cant hit walls
+            hitwalls();
         }
     }
-
-    
+    //If player choose to play with out blockwall
+    else if(blockWallCheckValue === 0){
+        //normalPlay    
+        runtruewalls();
+    }    
+        
     // Hitting tail = gameOver
     tail.forEach((snakePart) => {
         if (snakePosX === snakePart.x && snakePosY === snakePart.y) {
             gameOver();
         }
     });
-
+    
     // Create snake tail
     tail.push({ x: snakePosX, y: snakePosY });
 
     // Snake tail stays on normal length
     tail = tail.slice(-1 * snakeLength);
 
-    // food collision = increase length
+    // food collision = increase length + score + spawn new food
     if (snakePosX === foodPosX && snakePosY === foodPosY) {
         title.textContent = `Total score : ${++score}`;
         snakeLength++;
@@ -100,21 +118,20 @@ function moveStuff() {
         
         resetFood();
         return fakeScore;
-    }     
-    
+    }         
 
-    // NFood collision = decrease length
-    if (snakePosX === NfoodPosX && snakePosY === NfoodPosY  && NfoodInGame === true) {
+    // NFood collision = decrease length + NFood score
+    if(nFoodCheckValue){
+        if (snakePosX === NfoodPosX && snakePosY === NfoodPosY  && NfoodInGame === true) {
         Ntitle.textContent = `Total score of N-Food: ${++Nscore}`;
         if(snakeLength >= 5) {
             snakeLength--;
         }   
-        NfoodInGame = false;
-        kockaVytvorena = false;
-        
-        
-                     
-    } 
+        //Dont respawn NFood
+        NfoodInGame = false;                 
+        } 
+    }
+    
 }
 
 //Drawing board
@@ -122,32 +139,32 @@ function drawStuff() {
 
     DrawingPlayGround();
     
-     // food
+     // Drawing rectangle food
      rectangle("#db0000", foodPosX, foodPosY, tileSize, tileSize);
 
-     // tail
+     // Drawing rectangle tail
      tail.forEach((snakePart) =>
          rectangle("#555", snakePart.x, snakePart.y, tileSize, tileSize)
      );
  
-     // snake
+     // Drawing rectangle snake-head
      rectangle("black", snakePosX, snakePosY, tileSize, tileSize);
         
     // Spawn of NFood
     fakeScore.forEach(function(Num){
         
-        if(score === Num  && pouziteNum.indexOf(Num) === -1 && !kockaVytvorena ){  
-            
-            NfoodInGame = true;               
-            kockaVytvorena = true;         
+        if(score === Num  && pouziteNum.indexOf(Num) === -1  ){   
+            //Make sure that NFoddi is in the game           
+            NfoodInGame = true;    
+            //couting number, fakeScore so when fakescore is hit, it dont spawn it again        
             pouziteNum.push(Num);
         }                  
     })
     
     // Drawing NFood
-    if(NfoodInGame === true ){
+    if(nFoodCheckValue && NfoodInGame === true){
         
-        // Draw NFood
+        //Drawing rectangle NFood
         rectangle("#01c742", NfoodPosX, NfoodPosY, tileSize, tileSize);
 
         // NFood cant spawn on NFood
@@ -161,27 +178,31 @@ function drawStuff() {
                 (snakePart) => snakePart.x === NfoodPosX && snakePart.y === NfoodPosY
             )
         ) {
-            randomNFood();        
+            randomNFood();
         }               
     }
 
-    // Canvas blinking in blockWall = true
+    
     if(isPaused){
 
     }
-    canvasBlinking(blockWallStatus);
+    // Canvas blinking in blockWall = true
+    if(blockWallCheckValue === 0){
+        blockWallStatus = false;
+        canvasBlinking(blockWallStatus); 
+    } else if(blockWallCheckValue === 1){
+        canvasBlinking(blockWallStatus);
+    } 
 }
 
-
-
 // Random food position
-function resetFood() {
-    
+function resetFood() {    
     // Full map = gameOver
     if (snakeLength === tileCountX * tileCountY) {
         gameOver();
     }
 
+    //Random position
     foodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
     foodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
 
@@ -207,6 +228,7 @@ function resetFood() {
 
 // GAME OVER
 function gameOver() {
+    //Show on score boeard
     title.innerHTML = `☠️ <strong> ${score} </strong> ☠️`;
     gameIsRunning = false;
 

@@ -7,6 +7,7 @@
 
 // // ctx.scale(scaleCanvas, scaleCanvas);
 
+//DRAWING MAP-CANVAS ON MANUAL PAGE
 function gameLoop(){
     DrawingPlayGround();
     setTimeout(gameLoop, 1000 / fps);

@@ -5,6 +5,7 @@ const title = document.querySelector(".Total-score");
 const Ntitle = document.querySelector(".Total-Nscore");
 const ctx = canvas.getContext("2d");
 
+// SPEED OF GAME-SIZE OF SNAKE
 const fps = 15;
 const tileSize = 50;
 const tileCountX = canvas.width / tileSize;
@@ -12,7 +13,7 @@ const tileCountY = canvas.height / tileSize;
 
 
 
-// draw rectangle
+// DRAW RECTANGLE
 function rectangle(color, x, y, width, height) {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
