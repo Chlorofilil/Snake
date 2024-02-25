@@ -230,7 +230,11 @@ function resetFood() {
 function gameOver() {
     //Show on score boeard
     title.innerHTML = `☠️ <strong> ${score} </strong> ☠️`;
+    stopTimerFunction();
     gameIsRunning = false;
+        // const showTimer = document.getElementById("TimerFor_Blockwall");
+        // showTimer.textContent = `Dead`;
+    
 
     if(gameIsRunning === false){
         let myPlayers = JSON.parse(localStorage.getItem("Player"))

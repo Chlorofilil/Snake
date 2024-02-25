@@ -3,8 +3,10 @@ function gameLoop() {
         //PAUSING GAME
         if (isPaused) {
             // Hra je pozastavena
+            clearInterval(interval);
             return;
         }
+        
         drawStuff();        
         moveStuff();     
         setTimeout(gameLoop, 1000 / fps);
