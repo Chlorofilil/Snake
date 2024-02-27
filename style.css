@@ -17,10 +17,10 @@ body {
 }
 
 #mainCanvas {
-    position: fixed;
+    position: absolute;
     border: 10px solid black;
     left: 50%;
-    top: 43.5%;
+    top: 400px;
     transform: translate(-50%, -50%);    
 }
 
@@ -48,17 +48,19 @@ body {
 }
 
 .Total-score{
-    left: 50%;
-    top: 82.5%;    
+  position: relative;
+  left: 50%;
+  top: 750px;    
 }
 
 .Total-Nscore{
-    left: 50%;
-    top: 90%;
+  position: relative;
+  left: 50%;
+  top: 765px;
 }
 
 #TimerFor_Blockwall {
-    position: fixed;
+    position: absolute;
     width: 100px;
     height: 50px;
     left: 50%;
@@ -238,8 +240,9 @@ h2{
 }
 
 .back-spat{
-  left: 15%;
-  bottom: 50%;
+  left: 200px;
+  top: 400px;
+  /* bottom: 50%; */
 }
 
 /* Basic for choose error tools */
