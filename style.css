@@ -16,6 +16,10 @@ body {
   font-family: 'FontGame';
 }
 
+form {
+  left: 50%;
+}
+
 #mainCanvas {
     position: absolute;
     border: 10px solid black;
@@ -93,12 +97,17 @@ body {
 /*************************************************************************************************** 
                                 CSS FOR MAIN MANU
 *************************************************************************************************** */
+main{
+  width: 100%; 
+  max-width: 900px; 
+  margin: 0 auto; /* zarovnanie na stred */
+  text-align: center; /* zarovnanie obsahu na stred */
+}
+
 /* BTN */
-.BTN {
-  position: fixed;
+.BTN {  
   font-size: 40px;
   padding: 2px 7px;
-  transform: translate(-50%, -50%);
   letter-spacing: 1px;
   border-radius: 10px;
   font-weight: bold;
@@ -113,19 +122,31 @@ body {
   box-shadow: 5px 5px 8px black;
 }
 /* POSITION */
-#choose-game {  
-  left: 50%;
-  top: 25%;  
+#choose-game { 
+  /* display: block; */
+  margin-top: 20px;
 }
 
 #manual {
   left: 50%;
-  top: 40%;
+  /* display: block; */
+  margin-top: 20px;
 }
 
 #Top10 {
-  left: 50%;
-  top: 55%;
+  /* display: block; */
+  margin-top: 20px;
+  text-align: center;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#choose-game-link {
+  text-align: center; /* Vycentruje odkaz na stred */
 }
 
 /*************************************************************************************************** 
@@ -135,26 +156,21 @@ body {
 /*******  button for Choose_playground  *******/
 #Return-menu{
   left: 40%;
-  bottom: 3%;
+  top: 800px;
 }
 
 #Begin {
-  left: 60%;
-  bottom: 3%;
 }
 
 .back-mainmenu{
-  right: 0;
-  bottom:  5px;
+  position: fixed;
+  right: 10px;
+  bottom:  10px;
 }
 
 /*** Choose-playgraund_Checkbox-mapa ***/
 #ChooseYourMap{
-  position: absolute;
-  top: 41%;
-  left: 50%;
   height: 275px;
-  transform: translate(-50%, -50%);
 }
 
 .checkbox {
@@ -162,13 +178,11 @@ body {
 }
 
 .choose-pic_1 {
-  position: absolute;
   bottom: 5px;
   left: 50%;
   width: 200px; 
   height: 200px; 
   display: inline-block;
-  transform: translate(-50%, 0%);
   background-image: url('pics/Map_1.PNG');
   background-size: cover; 
   cursor: pointer;
@@ -176,8 +190,7 @@ body {
 
 h1{
   position: absolute;
-  width: 1200px;
-  top: 10%;
+  width: 100%;
   margin: 0;
   transform: translate(-50%, -0%); 
   left: 50%;
@@ -188,7 +201,13 @@ h1{
 }
 
 /*** Name input ***/
+
+#nameinput {
+  height: 110px;
+}
+
 h2{
+  /* max-width: 800px; */
   font-size: 35px;
   font-weight: bold;
   margin: 0;
@@ -196,18 +215,10 @@ h2{
   text-shadow: 5px 5px 8px rgba(0, 0, 0, 1);
 }
 
-.nameinput{
-  position: absolute;
-  width: 100%;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -0%);    
-}
-
 .sayYourName{
   background: #fdb44b; 
   border: 2px solid black;
-  width: 7.5%;
+  width: 100px;
   height: 35px;
   padding: 5px 10px;
   border-radius: 25px;
@@ -222,11 +233,7 @@ h2{
 
 /*** Choose if you want to play with tools ***/
 #ChooseYourTool{
-  position: absolute;
-  top: 77%;
-  left: 50%;
-  height: 300px;
-  transform: translate(-50%, -50%);
+  
 }
 
 .toolcheck {
@@ -257,13 +264,14 @@ h2{
 }
 /* Tool was not choosen */
 .warnigForMap {
-  top: 58%;
+  margin-top: 8px;
   left: 50%;
 }
 
 /* Error name check */
 .error-message-namecheck {
-  top: 24%;
+  /* top: 50%; */
+  margin-top: 8px;
   left: 50%;
 }
 
@@ -271,49 +279,44 @@ h2{
                                 CSS FOR TOP10 SERPENTS WEB  
 *************************************************************************************************** */
 #table-top10{
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%; 
+  max-width: 450px; 
+  margin: 20px auto 0;
+  text-align: center;
   color: #fdb44b;
   text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 1);
   font-size: 30px;
 }
 
-#table-top10 th{
-  padding: 15px;
+#table-top10 tr{
+  width: 50px;
 }
 
 #Return-menu-top10{
-  left: 50%;
-  bottom: 3%;
+  margin-top: 20px;
 }
 
 /*************************************************************************************************** 
                                 CSS FOR MANUAL
 *************************************************************************************************** */
 .descriptionText{
-  position: absolute;
-  width: 1200px;
   font-size: 25px;
   left: 50%;
 }
 
-#blocWall_description{  
-  height: 310px;  
-  top: 32.5%;
-  transform: translate(-50%, -0%);
+#blocWall_description{ 
+  height: 340px;
+  margin-top: 20px;
 }
 
 #NegativeFood_description{
-  height: 200px;
-  top: 77.5%;
-  transform: translate(-50%, -50%);
+  left: 50%;
+  margin-top: 20px;
 }
 
 #Pause_event{  
-  top: 97%;  
-  transform: translate(-50%, -50%);
+  left: 50%;
+  margin-top: 20px;
 }
 
 #blocWall_description p{  
@@ -322,9 +325,8 @@ h2{
 }
 
 #blocWall_description #ManualCanvas {
-  position: absolute;
-  transform: translate(-50%, 50%);
-  bottom: 25%;
+  margin-top: 10px;
+  /* transform: translate(-50%, -50%); */
 }
 
 .canvasManual{

@@ -77,7 +77,7 @@ document.addEventListener("submit", function(e){
             const errorMessageP = document.createElement("p");
             errorMessageP.textContent = "You did not say your name.";
             errorMessageP.classList.add("error-message-namecheck", "warningPos");
-            const form = document.querySelector("form");
+            const form = document.querySelector("#nameinput");
             form.appendChild(errorMessageP);
             checknamewarrning = false;            
         }  
@@ -105,11 +105,10 @@ document.addEventListener("submit", function(e){
         if(checkmapwarrning){
             //CHECK IF YOU DONT CHOOSE MAP
             const newDiv = document.createElement("div");
-            const newSpan = document.createElement("span");
-            newSpan.textContent = "You did not pick playgraund, please do so.";
-            newSpan.classList.add("warnigForMap", "warningPos");
-            newDiv.appendChild(newSpan);
-            document.body.appendChild(newDiv);
+            newDiv.textContent = "You did not pick playgraund, please do so.";
+            newDiv.classList.add("warnigForMap", "warningPos");
+            const form = document.querySelector("#ChooseYourMap");
+            form.appendChild(newDiv);
             checkmapwarrning = false;                
         }            
     } else if(checkmap) {
