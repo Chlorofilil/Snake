@@ -9,9 +9,15 @@ let NFoodCheck = 0;
 // Click for choose which mape you want to play set it = true.
 document.querySelector("#Choose-map").addEventListener("change", function(e){  
     checkmap = e.target.checked;   
-    //IN PLAYER PLAY ON GAME, THEN GO BACK TO MANEU, DONT USE ANY OF FEATURES THIS WILL SET IT ON 0 AUTOMATICLY 
-    localStorage.setItem("blockWallCheck", "0");
-    localStorage.setItem("NFoodCheck", "0");
+    
+    //Create and check featues on map
+    if (!localStorage.getItem("blockWallCheck")) {
+        localStorage.setItem("blockWallCheck", "0");
+    }
+    
+    if (!localStorage.getItem("NFoodCheck")) {
+        localStorage.setItem("NFoodCheck", "0");
+    }
 });
 
 //MAKE BORDER AROUND MAP THAT YOU CHOOSE 
@@ -23,40 +29,6 @@ document.addEventListener("change", function(){
         pickMap.style.border = 'none';
     } 
 });
-
-// Click if you want to play with Blockwall mode.
-let ChooseBlockwall = document.querySelector("#ChooseWallblock").addEventListener("change", function(e){
-    let ChooseBlockwall = document.querySelector(".BlockWallTool");
-
-    if(e.target.checked === true){
-        ChooseBlockwall.style.textDecoration = "underline #fdb44b";
-        //SETING WALLCHECK TO 1 SO PLAYER CAN PLAY WITH BLOCKWALL ON ANOTHER PAGE-SCRIPT.JS
-        wallCheck = 1;
-    } else if (e.target.checked === false) {
-        ChooseBlockwall.style.textDecoration = "none #fdb44b";
-        //SETING WALLCHECK TO 1 SO PLAYER CANT PLAY WITH BLOCKWALL ON ANOTHER PAGE-SCRIPT.JS
-        wallCheck = 0;
-    }
-    let wallCheckJSON = JSON.stringify(wallCheck);
-    localStorage.setItem("blockWallCheck", wallCheckJSON);
-})
-
-// Click if you want to play with Negative Food.
-let ChooseNegativeFood = document.querySelector("#ChooseNFood").addEventListener("change", function(e){
-    let ChooseNfood = document.querySelector(".NFoodTool");
-    
-    if(e.target.checked === true){
-        ChooseNfood.style.textDecoration = "underline #fdb44b";
-        //SETING WALLCHECK TO 1 SO PLAYER CAN PLAY WITH NFOOF ON ANOTHER PAGE-SCRIPT.JS
-        NFoodCheck = 1;
-    } else if (e.target.checked === false) {
-        ChooseNfood.style.textDecoration = "none #fdb44b";
-        //SETING WALLCHECK TO 1 SO PLAYER CANT PLAY WITH NFOOD ON ANOTHER PAGE-SCRIPT.JS
-        NFoodCheck = 0;
-    }
-    let nFoodcheck = JSON.stringify(NFoodCheck);
-    localStorage.setItem("NFoodCheck", nFoodcheck);
-})
 
 /*  SENDING NAME TO LOCALSTORAGE WITH ID
     CHECKING IF PLAYER ADD NAME AND CHOOSE MAPE
@@ -100,7 +72,7 @@ document.addEventListener("submit", function(e){
     // CANT START GAME IF U DONT ADD NAME AND CHOOSE MAP
     if(checkmap && playerOriginalName){
 
-        window.location.href = `index.html#${playerObjID.id}`;
+        window.location.href = `MainGame.html#${playerObjID.id}`;
     } else if(!checkmap) {
         if(checkmapwarrning){
             //CHECK IF YOU DONT CHOOSE MAP
@@ -119,3 +91,37 @@ document.addEventListener("submit", function(e){
         }            
     }    
 });
+
+// Click if you want to play with Blockwall mode.
+let ChooseBlockwall = document.querySelector("#ChooseWallblock").addEventListener("change", function(e){
+    let ChooseBlockwall = document.querySelector(".BlockWallTool");
+
+    if(e.target.checked === true){
+        ChooseBlockwall.style.textDecoration = "underline #fdb44b";
+        //SETING WALLCHECK TO 1 SO PLAYER CAN PLAY WITH BLOCKWALL ON ANOTHER PAGE-SCRIPT.JS
+        wallCheck = 1;
+    } else if (e.target.checked === false) {
+        ChooseBlockwall.style.textDecoration = "none #fdb44b";
+        //SETING WALLCHECK TO 1 SO PLAYER CANT PLAY WITH BLOCKWALL ON ANOTHER PAGE-SCRIPT.JS
+        wallCheck = 0;
+    }
+    let wallCheckJSON = JSON.stringify(wallCheck);
+    localStorage.setItem("blockWallCheck", wallCheckJSON);
+})
+
+// Click if you want to play with Negative Food.
+let ChooseNegativeFood = document.querySelector("#ChooseNFood").addEventListener("change", function(e){
+    let ChooseNfood = document.querySelector(".NFoodTool");
+    
+    if(e.target.checked === true){
+        ChooseNfood.style.textDecoration = "underline #fdb44b";
+        //SETING WALLCHECK TO 1 SO PLAYER CAN PLAY WITH NFOOF ON ANOTHER PAGE-SCRIPT.JS
+        NFoodCheck = 1;
+    } else if (e.target.checked === false) {
+        ChooseNfood.style.textDecoration = "none #fdb44b";
+        //SETING WALLCHECK TO 1 SO PLAYER CANT PLAY WITH NFOOD ON ANOTHER PAGE-SCRIPT.JS
+        NFoodCheck = 0;
+    }
+    let nFoodcheck = JSON.stringify(NFoodCheck);
+    localStorage.setItem("NFoodCheck", nFoodcheck);
+})

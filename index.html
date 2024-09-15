@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="queries.css">
-		<title>Serpent</title>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Header.css">
+    <link rel="stylesheet" href="queries.css">
+    <title>Serpent Playground</title>
+</head>
+<body>
+    <header>        
+        <h1 class="MENU-H1">SERPENT PLAYGROUND</h1>
+    </header>
 
-	<body>
-		<canvas id="mainCanvas" class="Game" width="600" height="600"></canvas>
-		<div id="TimerFor_Blockwall"></div>
-		<h1 class="Total-score score-css">SCORE</h1>
-		<h1 class="Total-Nscore score-css">NEGATIVE FOOD</h1>
-		 <!--BTN TO MAIN MANU-->
-		 <a href="mainmenu.html">
-			<button class="back-mainmenu BTN">Back</button>
-		</a>
-		
-		<script src="DrawingStuff.js"></script>	
-		<script src="Choose_map.js"></script>		
-        <script src="blockWall.js"></script>
-		<script src="pauseGame.js"></script>
-		<script src="script.js"></script>
-        <script src="Game_Loop.js"></script>
-	</body>
+    <main>
+        <div class="container">
+            <a href="Choose_playground.html" id="choose-game-link">
+                <button id="choose-game" class="BTN">Choose your playground</button>
+            </a>
+        </div>
+               
+        <div class="container">
+            <a href="BewareOfManual.html" id="choose-game-link">
+                <button id="manual" class="BTN">Beware of!</button>
+            </a>
+        </div>
+        
+        <div class="container">
+            <a href="Top10.html" id="choose-game-link">
+                <button id="Top10" class="BTN">The bigest serpents i saw!</button>
+            </a>
+        </div>
+        
+    </main>
+    
+</body>
 </html>
